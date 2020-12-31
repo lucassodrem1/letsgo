@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+
+<main class="mt-5">
+  <div class="container">
+    <div class="offset-md-4 col-md-8">
+      <form [formGroup]="writeForm" (ngSubmit)="onSubmit(writeForm.value)">
+        <div class="row">
+          <div class="col-4">
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              id="userInput"
+              placeholder="Usuário"
+              formControlName="username"
+            />
+          </div>
+
+          <div class="col-4">
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              id="feelingInput"
+              placeholder="Como você está se sentindo?"
+              autocomplete="off"
+              formControlName="feeling"
+            />
+          </div>
+
+          <div class="col-4">
+            <button type="submit" class="btn btn-dark btn-sm">Escrever</button>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col">
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Compartilhe algo!"
+                id="textInput"
+                style="height: 100px"
+                formControlName="text"
+                required
+              ></textarea>
+              <label for="textInput">Escreva algo!</label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="feed mt-5">
+        <h3 class="text-md-start poppins-font">Feed</h3>
+        <div class="border rounded p-2 mb-3" *ngFor="let feed of feeds">
+          <div class="fw-bold d-flex justify-content-between">
+            <span>
+              {{ feed.username }} /
+              <span class="text-muted">{{ feed.feeling }}</span>
+            </span>
+            <span class="text-muted h6">
+              {{ feed.time | date: 'dd-MM-yy' }}
+            </span>
+          </div>
+          <hr />
+          <p class="feed-text">
+            {{ feed.text }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
